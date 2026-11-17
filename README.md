@@ -7,7 +7,7 @@
 ```bash
 python3 gemini.py "Explain recursion in one line"
 python3 gemini.py --models                      # list models your key can use
-python3 gemini.py -m gemini-2.5-pro "..."       # pick a model
+python3 gemini.py -m gemini-3.1-pro-preview "..."       # pick a model
 cat file.py | python3 gemini.py -s "Review this code" -
 ```
 
@@ -17,4 +17,4 @@ Get a free key at https://aistudio.google.com/apikey, then do one of the followi
 - **Claude Code cloud:** open Environment settings, then Network secrets. Set host `generativelanguage.googleapis.com` and header `x-goog-api-key`, and use your key as the value.
 - **Local / env var:** `export GEMINI_API_KEY=your_key`
 
-You can set `GEMINI_MODEL` to change the default model (`gemini-2.5-flash`).
+You can set `GEMINI_MODEL` to change the default model (`gemini-3-flash-preview`).

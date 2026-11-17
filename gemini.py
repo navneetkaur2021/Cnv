@@ -5,7 +5,7 @@ Usage:
   python3 gemini.py "your question"          # ask Gemini
   echo "long prompt" | python3 gemini.py -   # prompt from stdin
   python3 gemini.py --models                 # list available models
-  python3 gemini.py -m gemini-2.5-pro "..."  # choose a model
+  python3 gemini.py -m gemini-3.1-pro-preview "..."  # choose a model
 
 Auth: GEMINI_API_KEY env var. In a Claude Code cloud session the network
 proxy injects the key, so a placeholder value is fine there.
@@ -13,7 +13,7 @@ proxy injects the key, so a placeholder value is fine there.
 import argparse, json, os, sys, urllib.request, urllib.error
 
 BASE = "https://generativelanguage.googleapis.com/v1beta"
-DEFAULT_MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+DEFAULT_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3-flash-preview")
 
 
 def call(method, path, body=None):
@@ -29,6 +29,8 @@ def call(method, path, body=None):
             return json.load(r)
     except urllib.error.HTTPError as e:
         sys.exit(f"Gemini API error {e.code}: {e.read().decode(errors='replace')}")
+    except (urllib.error.URLError, TimeoutError) as e:
+        sys.exit(f"Gemini request failed: {e}")
 
 
 def ask(prompt, model, system=None):
